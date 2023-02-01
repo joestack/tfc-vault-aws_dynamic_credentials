@@ -102,6 +102,8 @@ resource "vault_aws_secret_backend_role" "role" {
   backend = vault_aws_secret_backend.aws.path
   name    = "deploy"
   credential_type = "iam_user"
+  max_sts_ttl = 3600
+  default_sts_ttl = 1800
 
   policy_document = <<EOT
 {
