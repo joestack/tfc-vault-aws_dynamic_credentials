@@ -83,6 +83,13 @@ path "sys/health"
   capabilities = ["read", "sudo"]
 }
 
+# List, create, update, and delete key/value secrets
+path "aws/*"
+{
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+}
+
+
 EOT
 }
 
