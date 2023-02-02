@@ -10,7 +10,7 @@ resource "vault_auth_backend" "userpass" {
 
 resource "vault_generic_endpoint" "cia-user" {
   depends_on           = [vault_auth_backend.userpass]
-  path                 = "auth/userpass/users/cia-user"
+  path                 = "auth/userpass/users/${var.cia_user}"
   ignore_absent_fields = true
 
     data_json = data.template_file.cia.rendered
@@ -83,17 +83,11 @@ path "sys/health"
   capabilities = ["read", "sudo"]
 }
 
-# List, create, update, and delete key/value secrets
-path "aws/*"
-{
-  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-}
-
-
 EOT
 }
 
 resource "vault_aws_secret_backend" "aws" {
+  path       = "secret/aws"
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
@@ -138,4 +132,15 @@ resource "vault_aws_secret_backend_role" "role" {
   default_sts_ttl = 1800
   max_sts_ttl     = 3600
 }
+
+
+
+# List, create, update, and delete key/value secrets
+path "aws/*"
+{
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+}
+
+
+
 */
