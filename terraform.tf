@@ -3,10 +3,10 @@ data "terraform_remote_state" "vault-cluster" {
 
   config = {
     #organization = "joestack"
-    organization = var.tfc_access_oranization
+    organization = var.tfc_access_organization
     workspaces = {
       #name = "tfc-hcp-vault_cluster"
-      name = var.tcf_access_workspace
+      name = var.tfc_access_workspace
     }
   }
 }
