@@ -109,7 +109,11 @@ resource "vault_aws_secret_backend_role" "role" {
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": "iam:*",
+      "Action": [
+        "iam:*",
+        "s3:*",
+        "ec2:*"
+      ],
       "Resource": "*"
     }
   ]
